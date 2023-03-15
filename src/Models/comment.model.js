@@ -5,6 +5,10 @@ const ModelComment = mongo.Schema({
     type: Number,
     required: true
   },
+  userId: {
+    type: Number,
+    required: true
+  },
   comment: {
     type: String,
     required: true
@@ -28,7 +32,7 @@ const ModelComment = mongo.Schema({
 
 });
 
-module.exports = mongo.model('comment', ModelComment);
+module.exports = mongo.model('comments', ModelComment);
 
 /*
 

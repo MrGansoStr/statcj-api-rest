@@ -1,5 +1,7 @@
 
 const PublicRoutes = {
   GETANUSER: "getanuser",
-  GETUSERS: "getusers"
+  GETUSERS: "getusers",
+  GETCOMMENTS: "/getcomments",
+  TEST: "/test"
 }

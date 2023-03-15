@@ -1,7 +1,7 @@
 
 const PrivateRoutes = {
   UPDATECOMMENT: "updatecomment",
-  ANSWERCOMMENT: "asnwercomment"
+  ANSWERCOMMENT: "/answercomment"
 }
 
 module.exports = PrivateRoutes;
