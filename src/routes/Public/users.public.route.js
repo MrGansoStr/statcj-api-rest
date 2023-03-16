@@ -48,7 +48,7 @@ route.post('/login', async (req, res) => {
 
       const token = await jwt.sign(user.toJSON(), process.env.TOKENKEYJWT, { expiresIn: "4h" });
 
-      return res.status(200).send({ message: ResponseMessage.LoginSuccess.message, InfoUser: user, AccessToken: token, ExpiresInt: "5h" });
+      return res.status(200).send({ Code: "Login Success",message: ResponseMessage.LoginSuccess.message, InfoUser: user, AccessToken: token, ExpiresInt: "5h" });
     }
     else {
       return res.status(401).send(ResponseMessage.LoginError);

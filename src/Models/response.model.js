@@ -53,6 +53,7 @@ const LoginSuccess = {
 }
 
 const LoginError = {
+  Code: "Login Failed",
   message: "El usuario o la contraseña no son correctos"
 }
 
