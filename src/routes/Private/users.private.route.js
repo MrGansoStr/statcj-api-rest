@@ -3,6 +3,7 @@ const ModelUser = require('../../Models/user.model');
 const route = express.Router();
 const ResponseMessage = require('../../Models/response.model');
 const MakePassword = require('../../utilities/MakePassword');
+
 route.post('/editinfo', async (req, res) => {
   let params = { ...req.body };
   try {
@@ -22,6 +23,6 @@ route.post('/editinfo', async (req, res) => {
     console.log(error);
     return res.status(400).send(ResponseMessage.ErrorOcurred);
   }
-})
+});
 
 module.exports = route;

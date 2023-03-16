@@ -17,7 +17,9 @@ route.get('/getcomments', async (req, res) => {
           as: "Usuario"
         }
       },
-      { $unwind: "$Usuario" }
+      { $unwind: "$Usuario" }, {
+        $unset: "Usuario.password"
+      }
       /*,
       {
         $graphLookup: {

@@ -43,8 +43,8 @@ route.post('/login', async (req, res) => {
     let [user] = await ModelUser.find({
       username: params.username
     });
-
-    if (user.length != 0 && ComparePassword(params.password, user.password)) {
+    //console.log(user);
+    if(user != undefined && user?.length != 0 && ComparePassword(params.password, user.password)) {
 
       const token = await jwt.sign(user.toJSON(), process.env.TOKENKEYJWT, { expiresIn: "4h" });
 
