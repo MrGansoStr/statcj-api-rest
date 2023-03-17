@@ -10,7 +10,15 @@ require('dotenv').config();
 route.get('/getusers', async (req, res) => {
   let { message } = ResponseMessage.RequestSuccess;
   try {
-    let data = await ModelUser.find();
+    let data = await ModelUser.aggregate([
+      {
+        $unset: "password"
+      }, {
+        $unset: "username"
+      }, {
+        $unset: "email"
+      }
+    ]);
     return res.status(200).send({ message: message, data: data });
   } catch (error) {
     console.log(error);
@@ -44,11 +52,11 @@ route.post('/login', async (req, res) => {
       username: params.username
     });
     //console.log(user);
-    if(user != undefined && user?.length != 0 && ComparePassword(params.password, user.password)) {
+    if (user != undefined && user?.length != 0 && ComparePassword(params.password, user.password)) {
 
       const token = await jwt.sign(user.toJSON(), process.env.TOKENKEYJWT, { expiresIn: "4h" });
 
-      return res.status(200).send({ Code: "Login Success",message: ResponseMessage.LoginSuccess.message, InfoUser: user, AccessToken: token, ExpiresInt: "5h" });
+      return res.status(200).send({ Code: "Login Success", message: ResponseMessage.LoginSuccess.message, InfoUser: user, AccessToken: token, ExpiresInt: "5h" });
     }
     else {
       return res.status(401).send(ResponseMessage.LoginError);
