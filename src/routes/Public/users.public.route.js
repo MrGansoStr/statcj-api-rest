@@ -32,7 +32,7 @@ route.post('/register', async (req, res) => {
     let [list] = await ModelUser.find({
       username: params.username
     }).exec();
-    if (list.length != 0) {
+    if (list !== undefined) { // If there are more users with the same username
       return res.status(401).send(ResponseMessage.RegisterError);
     }
     let user = ModelUser(params);
