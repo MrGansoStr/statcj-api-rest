@@ -18,8 +18,8 @@ app.options('*', cors(corsOptions));
 app.get('/', async (req, res) => {
   return res.status(200).send({message: "Welcome to API REST STATCJ, Public Routes are: ", routes: ["/api/getusers","/api/register", "/api/login", "/api/getcomments"]});
 });
-app.use('/api', ApiRoutes.Public);
-app.use('/api', ValidToken, ApiRoutes.Private);
+app.use('/public-api', ApiRoutes.Public);
+app.use('/private-api', ValidToken, ApiRoutes.Private);
 app.use('*' ,(req, res, next) => {
   res.status(404).send({message: "NOT FOUND API"});
 });

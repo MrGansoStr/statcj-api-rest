@@ -57,6 +57,25 @@ const LoginError = {
   message: "El usuario o la contraseña no son correctos"
 }
 
+const EmailSuccess = {
+  message: "Email encontrado con éxito"
+}
+
+const EmailError = {
+  Code: "Not Found Email",
+  message: "Email no encontrado"
+}
+
+const RecoverySuccess = {
+  Code: "Recovery Success",
+  message: "Se actualizó la contraseña correctamente"
+}
+
+const RecoveryError = {
+  Code: "Recovery Error",
+  message: "No se pudo actualizar la contraseña",
+}
+
 module.exports = {
   NotFound,
   RequestSuccess,
@@ -69,5 +88,9 @@ module.exports = {
   EditInfoSuccess,
   LoginSuccess,
   LoginError,
-  RegisterError
+  RegisterError,
+  EmailSuccess,
+  EmailError,
+  RecoverySuccess,
+  RecoveryError
 };

@@ -32,8 +32,14 @@ route.post('/register', async (req, res) => {
     let [list] = await ModelUser.find({
       username: params.username
     }).exec();
+    let [existEmail] = await ModelUser.find({
+      email: params.email
+    }).exec();
     if (list !== undefined) { // If there are more users with the same username
-      return res.status(401).send(ResponseMessage.RegisterError);
+      return res.status(401).send({ Code: "Error Username", message: ResponseMessage.RegisterError.message });
+    }
+    if (existEmail !== undefined) {
+      return res.status(401).send({ Code: "Error Email", message: "El email ya está en uso" });
     }
     let user = ModelUser(params);
     user.password = MakePassword(user.password);
@@ -63,6 +69,29 @@ route.post('/login', async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+    return res.status(400).send(ResponseMessage.ErrorOcurred);
+  }
+});
+
+route.post('/recoveryemail', async (req, res) => {
+  let params = { ...req.body };
+  try {
+    let [result] = await ModelUser.aggregate(
+      [
+        {
+          $match: { email: params.email }
+        },
+        {
+          $unset: ["password"],
+        }
+      ]
+    ).exec();
+    if (result === undefined) {
+      return res.status(401).send(ResponseMessage.EmailError);
+    }
+    const token = await jwt.sign(result, process.env.TOKENKEYJWT, { expiresIn: "25m" });
+    return res.status(200).send({ Code: "Found", username: result.username, message: ResponseMessage.EmailSuccess.message, TokenRecovery: token, TokenExpiresIn: "25m" });
+  } catch (error) {
     return res.status(400).send(ResponseMessage.ErrorOcurred);
   }
 });
