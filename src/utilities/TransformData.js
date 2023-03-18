@@ -8,7 +8,7 @@ const SearchComments = (ArrToSearch, Data) => {
       }
     }
   }
-  //console.log("Comentarios Encontrados -> ", FoundComments);
+  //console.log(FoundComments);
   return FoundComments;
 }
 
@@ -16,7 +16,7 @@ const SearchIdCommentToHide = (Data) => {
   let ArrayIds = [];
   Data.forEach(e => {
     if(e?.childComments?.length != 0) {
-      for(let i = 0; i < e.childComments.length; i++) {
+      for(let i = 0; i < e.childComments?.length; i++) {
         ArrayIds.push(e.childComments[i]);
       }
     }
@@ -24,18 +24,25 @@ const SearchIdCommentToHide = (Data) => {
   return ArrayIds;
 }
 
-
 const TransformData = (Data = []) => {
-  let IdToHide = SearchIdCommentToHide(Data)
-  let TransformedData = [];
+  let IdToHide = SearchIdCommentToHide(Data);
+  let DataToTransform = [];
+  //console.log("The data: ", Data);
+  //console.log("Data to Transform ->", DataToTransform)
   for(let i = Data.length - 1; i >= 0; i--) {
+    let ObjComment = Data[i];
     if(Data[i].childComments?.length != 0) {
-      Data[i].Comments = SearchComments(Data[i].childComments, Data);
+      ObjComment.Comments = SearchComments(Data[i].childComments, Data); // dont move
+      //console.log("Los comentarios hijos: ", ObjComment);
+      DataToTransform.push({...Data[i], Comments: SearchComments(Data[i].childComments, Data)});
+    }
+    else{
+      DataToTransform.push(Data[i]);
     }
   }
-  TransformedData = Data.filter(e => !IdToHide.includes(e.idComment))
+  const TransformedData = DataToTransform.filter(e => !IdToHide.includes(e.idComment));
+  //console.log("TransformedData -> ", TransformedData);
   return TransformedData;
 }
-
 
 module.exports = TransformData;

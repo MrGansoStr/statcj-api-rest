@@ -45,7 +45,7 @@ route.post('/answercomment', async (req, res) => {
    * }
    */
   try {
-    let comment = CommentModel(params);
+    let comment = await CommentModel(params);
     await comment.save();
     let comments = await CommentModel.find({
       userId: params.userId
