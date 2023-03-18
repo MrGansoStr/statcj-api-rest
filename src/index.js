@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 app.get('/', async (req, res) => {
-  return res.status(200).send({message: "Welcome to API REST STATCJ, Public Routes are: ", routes: ["/api/getusers","/api/register", "/api/login", "/api/getcomments"]});
+  return res.status(200).send({message: "Welcome to API REST STATCJ, Public Routes are: ", routes: ["/public-api/getusers","/public-api/register", "/public-api/login", "/public-api/getcomments", "/public-api/recoveryemail"]});
 });
 app.use('/public-api', ApiRoutes.Public);
 app.use('/private-api', ValidToken, ApiRoutes.Private);

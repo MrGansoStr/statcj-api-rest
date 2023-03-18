@@ -62,7 +62,7 @@ const EmailSuccess = {
 }
 
 const EmailError = {
-  Code: "Not Found Email",
+  Code: "Email Not Found",
   message: "Email no encontrado"
 }
 
