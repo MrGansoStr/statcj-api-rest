@@ -71,7 +71,7 @@ route.post('/deletecomment', async (req, res) => {
   try {
     await CommentModel.deleteOne({
       idComment: params.idComment,
-      username: params.username
+      userId: params.userId
     })
     return res.status(200).send(ResponseMessage.DeleteCommentSuccess);
   } catch (error) {
