@@ -4,14 +4,13 @@ This project is used for StatCJ with ReactJS to manage comments and users.
 # Install dependencies
 > npm install  
 > npm i
-> npm ci
 
 ## Run code
 In Developer Mode is used with Morgan and you can supervise all request.
 
-Developer Mode:
+### Developer Mode:
 > npm run dev
-Normal Mode:
+### Normal Mode:
 > npm start
 
 ## Build
